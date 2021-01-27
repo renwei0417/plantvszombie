@@ -13,6 +13,9 @@ class Constant_GridSize:
     GRID_Y_LEN = 5
     GRID_X_SIZE = 80
     GRID_Y_SIZE = 100
+    GRID_OFFSET_X = 10
+    GRID_OFFSET_Y = 0
+    
 
 class Constant_Color:
     WHITE        = (255, 255, 255)
@@ -212,6 +215,10 @@ class Constant_LevelState:
 class Constant_BacckGround:
     BACKGROUND_DAY = 0
     BACKGROUND_NIGHT = 1
+
+
+class PlayRound_Layout:
+    
 
 class Constant_PlantSelection_LayOut:
     
