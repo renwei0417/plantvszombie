@@ -1,6 +1,14 @@
 import pygame as pg
 import os 
 import constant as C
+
+def get_plant_info_from_card_name(cardname):
+    plant_name = cardname.split('_')[1]
+
+    for i, name in enumerate(C.Constant_PlantInfo.plant_name_list):
+        if(name.lower()== plant_name):
+            return C.Constant_PlantInfo.plant_name_list[i], C.Constant_PlantInfo.plant_frozen_time_list[i], C.Constant_PlantInfo.plant_sun_list[i]
+        return None 
 def load_image_frames(directory,image_name, colorkey, accept):
     frame_list=[]
     number_of_image=0

@@ -64,20 +64,26 @@ class Card:
 
 class Play:
     def __init__(self, cardname_list, card_images, card_play_images, money, current_time):
-        self.card_list = card_list
+        self.card_list = cardname_list
         self.money = money 
         self.done = False 
         self.current_time =current_time
         self.card_list= []
+        self.card_to_sprite_image={}
+
+        card_x_length = 53
+        card_y_length = 74
 
 
+        #self.UpperCard_TotalOffSet_X = C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_X + C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_X
+        self.UpperCard_TotalOffSet_X = 78
+        #self.UpperCard_TotalOffSet_Y=C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_Y+ C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_y
+        self.UpperCard_TotalOffSet_Y = 8
 
-
-        self.UpperCard_TotalOffSet_X = C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_X + C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_X
-        self.UpperCard_TotalOffSet_Y=C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_Y+ C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_y
-     
-
-        sef.card_grid = Tool.Grid(1, 8, self.UpperCard_TotalOffSet_X, self.UpperCard_TotalOffSet_Y, C.Constant_PlantSelection_LayOut.Lower_PANEL_Card_X_INTERNAL, C.Constant_PlantSelection_LayOut.Lower_PANEL_Card_Y_INTERNAL)
+        sef.card_grid = Tool.Grid(1, 8, self.UpperCard_TotalOffSet_X, self.UpperCard_TotalOffSet_Y, card_x_length, card_y_length)
         self.map_grid = Tool.Grid(5, 9 , 30, 80,  100)
     def init_game(self):
-
+        for i, card_name in enumerate(self.card_list):
+            single_card_image = Tool.All_Images[card_name]
+            single_card = Card(self.card_grid,i,card_name,single_card_image,
+    def ProcessEvent(self, x,y,clickLeft,clickRight):
