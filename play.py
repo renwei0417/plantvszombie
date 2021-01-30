@@ -74,16 +74,28 @@ class Play:
         card_x_length = 53
         card_y_length = 74
 
+        grid_x = 9
+        grid_y =5 
+
 
         #self.UpperCard_TotalOffSet_X = C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_X + C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_X
         self.UpperCard_TotalOffSet_X = 78
         #self.UpperCard_TotalOffSet_Y=C.Constant_PlantSelection_LayOut.Upper_Panel_Offset_Y+ C.Constant_PlantSelection_LayOut.Upper_Panel_Card_Offset_y
         self.UpperCard_TotalOffSet_Y = 8
 
+        #下面的是用来选牌用的
         sef.card_grid = Tool.Grid(1, 8, self.UpperCard_TotalOffSet_X, self.UpperCard_TotalOffSet_Y, card_x_length, card_y_length)
-        self.map_grid = Tool.Grid(5, 9 , 30, 80,  100)
+        # 
+        self.map_grid = Tool.Grid(grid_y, grid_x , 30, 80,  100)
+        self.plant_position_map = [[True *grid_x] for i in range(grid_y)]
     def init_game(self):
         for i, card_name in enumerate(self.card_list):
             single_card_image = Tool.All_Images[card_name]
-            single_card = Card(self.card_grid,i,card_name,single_card_image,
+            card_spirte_info = Tool.get_plant_info_from_card_name(card_name)
+            plant_name, plant_freezetime, plant_cost = card_spirte_info
+            plant_sprite_images = Tool.All_Images[plant_name]
+
+            single_card = Card(self.card_grid,i,card_name,single_card_image, plant_cost, plant_freezetime)
+            self.card_list.append(single_card)
+            
     def ProcessEvent(self, x,y,clickLeft,clickRight):
