@@ -51,9 +51,10 @@ while not done:
         left_click,right_click=mouse_click
         if not panelSelector.Done:
             panelSelector.ProcessEvent(x,y,left_click,right_click)
+            panelSelector.Draw(Tool.Screen)
             if panelSelector.Done:
                 print('need to handle the changes')
-            panelSelector.Draw(Tool.Screen)
+           
         pg.display.update()
         mouse_pos=[None,None]
         mouse_click=[None,None]

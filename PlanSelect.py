@@ -55,7 +55,6 @@ class PanelSelector():
         self.ButtonImage_Height=self.ButtonImage.get_rect().height
 
         self.ButtonGrid=Tool.Grid(1,1,C.Constant_PlantSelection_LayOut.Button_Image_Offset_x,C.Constant_PlantSelection_LayOut.Button_Image_Offset_y,self.ButtonImage_Width,self.ButtonImage_Height)
-       
     def ProcessEvent(self, x,y,clickLeft,clickRight):
         if x is None and y is None:
             # this is handling the time events instead of user inputs
@@ -115,3 +114,7 @@ class PanelSelector():
             self.ButtonGrid.DrawImages(Screen,[self.ButtonImage])
 
         return 
+    def Initialize(state):
+        return 
+    def Finish(state):
+        state['select_cards'] = self.UpperCards.copy()
