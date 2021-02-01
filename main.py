@@ -29,6 +29,12 @@ keys_press=None
 keys_up= None 
 
 
+game_state= {}
+
+games_level = [PlanSelect(), Play()]
+
+
+
 while not done:
     for event in pg.event.get():
         if event.type==pg.QUIT:

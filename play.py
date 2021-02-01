@@ -64,10 +64,26 @@ class Card:
 
 class Play:
     def __init__(self, cardname_list, card_images, card_play_images, money, current_time):
-        self.card_list = cardname_list
-        self.money = money 
-        self.done = False 
-        self.current_time =current_time
+
+    def init_game(self, dictstate):
+
+        self.card_list = ["card_sunflower",
+        'card_peashooter',
+        'card_snowpea',
+        'card_wallnut',
+        'card_cherrybomb',
+        'card_threepeashooter',
+        'card_squash',
+        'card_jalapeno',
+
+        ]
+        if 'select_cards' in dictstate:
+            self.card_list = dictstate['select_cards']
+        self.money = 100
+        if "money" in dictstate:
+            self.money = dictstate['money']
+        self.done = False
+        self.current_time =dictstate['current_time']
         self.card_list= []
         self.card_to_sprite_image={}
 
@@ -88,7 +104,6 @@ class Play:
         # 
         self.map_grid = Tool.Grid(grid_y, grid_x , 30, 80,  100)
         self.plant_position_map = [[True *grid_x] for i in range(grid_y)]
-    def init_game(self):
         for i, card_name in enumerate(self.card_list):
             single_card_image = Tool.All_Images[card_name]
             card_spirte_info = Tool.get_plant_info_from_card_name(card_name)
