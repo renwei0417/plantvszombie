@@ -68,9 +68,11 @@ def load_all_gfx(directory, colorkey=C.Constant_Color.WHITE, accept=('.png', '.j
 
 
 def get_surface_from_image(image, x, y, width, height, colorkey=C.Constant_Color.BLACK, scale=1):
+    
     subScreen=pg.Surface([width,height])
     rect=subScreen.get_rect()
     #subScreen.blit(image, 
+    image_scale = pg.transform.scale(image, )
     subScreen.blit(image, (0, 0), (x, y, width, height))
     subScreen.set_colorkey(colorkey)
     subScreen = pg.transform.scale(subScreen,
