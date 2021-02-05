@@ -6,9 +6,9 @@ def get_plant_info_from_card_name(cardname):
     plant_name = cardname.split('_')[1]
 
     for i, name in enumerate(C.Constant_PlantInfo.plant_name_list):
-        if(name.lower()== plant_name):
+        if(name.lower()== plant_name.lower()):
             return C.Constant_PlantInfo.plant_name_list[i], C.Constant_PlantInfo.plant_frozen_time_list[i], C.Constant_PlantInfo.plant_sun_list[i]
-        return None 
+    return None 
 def load_image_frames(directory,image_name, colorkey, accept):
     frame_list=[]
     number_of_image=0
@@ -68,11 +68,9 @@ def load_all_gfx(directory, colorkey=C.Constant_Color.WHITE, accept=('.png', '.j
 
 
 def get_surface_from_image(image, x, y, width, height, colorkey=C.Constant_Color.BLACK, scale=1):
-    
     subScreen=pg.Surface([width,height])
     rect=subScreen.get_rect()
     #subScreen.blit(image, 
-    image_scale = pg.transform.scale(image, )
     subScreen.blit(image, (0, 0), (x, y, width, height))
     subScreen.set_colorkey(colorkey)
     subScreen = pg.transform.scale(subScreen,
@@ -95,6 +93,8 @@ class Grid():
         self.width=xinterval*column
         self.height=yinterval*row
     def IsInRegion(self, x,y):
+        if x is None or y is None:
+            return False 
         x_distance=x-self.leftx
         y_distance=y-self.lefty
         if x_distance >=0 and y_distance>=0 and x_distance<= self.width and y_distance<=self.height:

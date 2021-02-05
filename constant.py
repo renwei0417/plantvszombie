@@ -138,7 +138,7 @@ class Constant_Card:
     CARD_SNOWPEASHOOTER = 'card_snowpea'
     CARD_WALLNUT = 'card_wallnut'
     CARD_CHERRYBOMB = 'card_cherrybomb'
-    CARD_THREEPEASHOOTER = 'card_threepeashooter'
+    CARD_THREEPEASHOOTER = 'card_threepeater'
     CARD_REPEATERPEA = 'card_repeaterpea'
     CARD_CHOMPER = 'card_chomper'
     CARD_PUFFSHROOM = 'card_puffshroom'
@@ -216,8 +216,6 @@ class Constant_BacckGround:
     BACKGROUND_DAY = 0
     BACKGROUND_NIGHT = 1
 
-
-class PlayRound_Layout:
     
 
 class Constant_PlantSelection_LayOut:

@@ -36,7 +36,6 @@ class Card:
         if self.current_time - self.previous_time > self.freeze_time:
             return True
         return False
-#//return value , 前面表示是否按下，后边表示是否落下
 
     #现在点的是你
     def handle_clicked(self, current_time, money):
@@ -66,37 +65,7 @@ class Card:
                 self.current_time = current_time
     def handle_idle(self, current_time):
         this.current_time = current_time
-
-
-    
-
-
-    # def ProcessEvent(self, x,y,clickLeft,clickRight, money, current_time, is_valid_region): # / return whether it's clicked
-    #     if clickLeft is None and clickRight is None:
-    #         return False, False 
-    #     if grid.IsInRegion(x,y): #// 现在在点击我，我得看看
-    #         if  self.click_state == 0: #以前没点的话就要看看能否点，有钱并且时间已经超过冷冻时间。
-    #             if(self.isClickable(money)): 
-    #                 self.click_state == 1
-    #                 self.draw_image_index =1
-    #                 return True, False
-    #         else:
-    #             self.click_state == 0 # // 
-    #             self.draw_image_index = 0
-    #         # now should be able to process time
-    #         self.current_time = current_time
-    #     else:
-    #         if is_valid_region:
-    #             if self.click_state == 1:  #按下鼠标这个时候要布置植物，这个时候需要判断是不是
-    #                 self.click_state = 0
-    #                 self.draw_image_index = 0
-    #                 self.previous_time = current_time
-    #                 self.current_time = current_time
-    #                 return False, True 
-    #         else:
-    #             self.current_time = current_time
-    #     return False, False 
-                
+             
     def draw(self, screen)
         image_to_draw = self.image_list[self.draw_image_index]
         screen.blit(image_to_draw, (self.x, self.y), (0, 0, self.width, self.height))
