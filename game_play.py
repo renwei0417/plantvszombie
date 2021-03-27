@@ -2,6 +2,7 @@ import pygame as pg
 import os 
 import constant as C
 import Tool
+import plants
 
 class Card:
     def __init__(self, grid, index, name, image, cost, freeze_time, current_time):
@@ -93,26 +94,7 @@ class Card:
 
 
 #现在来说，只是为了能够显示出来
-class Plant:
-    def __init__(self, name, images, x, y, width, height, current_time):
-        self.name=name
-        self.images = []
-        for single_image in images:
-            image_copy = Tool.get_surface_from_image_samesize(single_image)
-            self.images.append(image_copy)
-        self.x =x 
-        self.y =y 
-        self.width = width
-        self.height =height 
-        self.current_time = current_time
-        self.image_index =0 
-        self.refresh_time_interval = 100
-    def update(self, time):
-        if time - self.current_time >= self.refresh_time_interval:
-            self.image_index = (self.image_index +1) % len(self.images)
-            self.current_time =time 
-    def draw(self, Screen):
-        Screen.blit(self.images[self.image_index], (self.x, self.y), (0, 0, self.width, self.height))
+
 
 
 class Play:
@@ -245,7 +227,7 @@ class Play:
 
                 plant_images = self.card_to_sprite_image[self.click_card_name]
                 x, y = self.map_grid.GetCorxCorY(total_index)
-                newplant= Plant(self.click_card_name, plant_images,x,y, self.map_grid.xinterval, self.map_grid.yinterval, self.current_time)
+                newplant= plants.Plant(self.click_card_name, plant_images,x,y, self.map_grid.xinterval, self.map_grid.yinterval, self.current_time)
                 self.plant_list.append(newplant)
                 self.plant_position_map[row_index][column_index] = False
 
