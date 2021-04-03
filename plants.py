@@ -2,6 +2,27 @@ import pygame as pg
 import Tool
 
 
+class PlantAndBulletHarmType(Enum):
+    NoAttack =0
+    NormalAttack =1
+    FreeAttach = 2
+    BlindAttack = 3
+    StopAttack = 4
+class ZombieAttachType(Enum):
+    NoAttack =0
+    NormalAttack =1
+class PlantStateType(Enum):
+    Normal =0
+    Attacked =1
+    UnderAttack = 2
+    Dead = 3 
+class ZombieStateType(Enum):
+    Normal = 0
+    SlowDown =1
+    Freeze = 2
+    Blind =3 
+    Dying = 4
+
 
 
 class PeaShooterType(Enum):
@@ -28,7 +49,7 @@ pea_bullet_normal_image, pea_bullet_explade_image = get_peashooter_bullet_image(
 
 
 class Plant:
-    def __init__(self, name, images, x, y, width, height, current_time):
+    def __init__(self, name, images, x, y, width, height, health, current_time, dict):
         self.name=name
         self.images = []
         for single_image in images:
@@ -43,17 +64,29 @@ class Plant:
         # self.rect= （x, y, width, height)
         self.current_time = current_time
         self.image_index =0 
+        self.health = health
         self.refresh_time_interval = 100
         self.attack_interval = 10
+    def handle_previous(self, time):
+        return 
     def update(self, time):
         if time - self.current_time >= self.refresh_time_interval:
             self.image_index = (self.image_index +1) % len(self.images)
             self.current_time =time 
     def draw(self, Screen):
         Screen.blit(self.images[self.image_index], (self.rect.x, self.rect.y), (0, 0, self.rect.width, self.rect.height))
+    def attack(self, zombie_list):
+        return None # or a list if it generate bullet
+    def accept_damage(self, harm_value, zombie_attack_type):
+        self.health = self.health - harm_value
+    def produce_sun(self):
+        return None
+    def is_alive(self):
+        return True 
+
         
-    def can_attach(self):
-        return False 
+    # def can_attach(self):
+    #     return False 
 
 
 
@@ -62,10 +95,15 @@ class BulletType(Enum):
     MushRoom = 1
 
 class PeaShooterBullet:
-    def __init__(self, x, y, width, height, speed, category, normal_image, explode_images):
+    def __init__(self, x, y, width, height, speed, damage, category, normal_image, explode_images):
 
         self.name = name
-        self.images = 
+        self.normal_image = normal_image
+        self.explode_images = explode_images
+        self.rect = pg.Rect(x, y, width, height)
+        self.speed = speed 
+        self.damage = damage 
+        self.category = category 
 
 
     def update(self, game_info):
@@ -82,12 +120,35 @@ class PeaShooterBullet:
             if(self.current_time - self.explode_timer) > 500:
                 self.kill()
 
-    def setExplode(self):
-        self.state = c.EXPLODE
-        self.explode_timer = self.current_time
-        self.frames = self.explode_frames
-        self.image = self.frames[self.frame_index]
+    def attack(self, zombie_list):
+        return 
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+    def handle_previous(self, time):
+        return 
+
+
+class Zombie:
+    def __init__(self, x, y, width, height, dict ):
+        #self.name = name
+        self.normal_image = normal_image
+        self.explode_images = explode_images
+        self.rect = pg.Rect(x, y, width, height)
+        self.speed = speed 
+        self.damage = damage 
+        self.category = category 
+    def attack(self, plants_list):
+        return 
+    def update(self, time):
+        return 
+    def draw(self, Screen):
+        return 
+    def accept_damage(self, damage, plantbullet_attack_type):
+        return 
+    def is_alive(self,damage):
+        return True
+    def handle_previous(self, time):
+        return 
+        
 
