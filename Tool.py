@@ -128,6 +128,13 @@ pg.init()
 
 
 
+def get_level_2_images(path,colorkey=C.Constant_Color.WHITE, accept=('.png', '.jpg', '.bmp', '.gif'),colorkey=C.Constant_Color.WHITE, accept=('.png', '.jpg', '.bmp', '.gif'))
+    image_dict = {}
+    for path_level in os.listdir(path):
+        #这里的level是 NormalZombie,  ConeheadZombie, FlagZombie, NewsPaperZombie, NormalZombie
+        for path_level_1 in os.listdir(path_level):
+            images = load_image_frames(os.path.join(path,path_level, path_level_1,),path_level_1)
+            image_dict[path_level_1] = images 
 
 
 
@@ -137,4 +144,27 @@ pg.display.set_caption("plants vs zombi")
 
 resourceDirectory=r'D:\Code\PlantsVsZombies\resources\graphics'
 All_Images=load_all_gfx(resourceDirectory)
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+
 
