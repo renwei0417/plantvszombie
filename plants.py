@@ -1,6 +1,7 @@
 import pygame as pg
 import Tool
 from  zombie_const import * 
+from enum import Enum 
 
 
 
@@ -32,18 +33,17 @@ class ZombieUnderAttackState(Enum):
 
 #定义一下把
 
-Image_Process_Function = 
-{
-    Transparent = "Transparent"
-    TurnBlue = "TurnBlue"
-}
+# Image_Process_Function = {
+#     Transparent : "Transparent",
+#     TurnBlue : "TurnBlue"
+# }
 
 
 
 Attack_Effect_Time = {
-    AttackType.IceAttack: {'image_process':Image time':5, "speed":1.0},
-    AttackType.BlindAttack:{'time':20,'speed':0.0}
-    AttackType.StopAttack: {'speed'}
+    AttackType.IceAttack: {'time':5, "speed":1.0},
+    AttackType.BlindAttack:{'time':20,'speed':0.0},
+    AttackType.StopAttack: {'time':20,'speed':0.0},
     AttackType.IceAttack: {'time':20, "speed":0.5},
     AttackType.BlindAttack:{'time':20,'speed':0.0}
 }
@@ -372,7 +372,8 @@ class Zombie:
             if self.state.time_since_last_image_refresh > self.state.image_refresh_time:
                 self.image_index =  (self.image_index + 1) % len(self.images)
                 self.state.time_since_last_image_refresh = 0 
-            else self.state.time_since_last_image_refresh = self.state.time_since_last_image_refresh + self.state.current_time - self.state.previous_time
+            else:
+                 self.state.time_since_last_image_refresh = self.state.time_since_last_image_refresh + self.state.current_time - self.state.previous_time
         else:
             self.image_index =0 
             self.state.time_since_last_image_refresh = 0
