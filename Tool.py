@@ -148,6 +148,9 @@ All_Images=load_all_gfx(resourceDirectory)
 
 Zombie_Images = get_level_2_images(r'D:\Code\PlantsVsZombies\resources\graphics\Zombies')
 
+Max_X = 800
+Max_Y = 600
+
 
 
 
