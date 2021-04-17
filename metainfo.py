@@ -154,6 +154,20 @@ class ZombieImageEnum(Enum):
         ZombieLostHeadAttack="ZombieLostHeadAttack"
 
 ZombieImageArray=["BucketheadZombie","BucketheadZombieAttack","ConeheadZombie","ConeheadZombieAttack","FlagZombie","FlagZombieAttack","FlagZombieLostHead","FlagZombieLostHeadAttack","NewspaperZombie","NewspaperZombieAttack","NewspaperZombieDie","NewspaperZombieLostHead","NewspaperZombieLostHeadAttack","NewspaperZombieNoPaper","NewspaperZombieNoPaperAttack","BoomDie","Zombie","ZombieAttack","ZombieDie","ZombieHead","ZombieLostHead","ZombieLostHeadAttack"]
+
+class ZombieName(Enum):
+        Zombie = "Zombie"
+        NewspaperZombie = "NewspaperZombie"
+        FlagZombie = "FlagZombie"
+        ConeheadZombie = "ConeheadZombie"
+        BucketheadZombie = "BucketheadZombie"
+
+#正常的僵尸
+
+
+
+#-------------------------------------------------------------------------------------------
+
 class BulletImageEnum(Enum):
         BulletMushRoom="BulletMushRoom"
         BulletMushRoomExplode="BulletMushRoomExplode"
@@ -161,6 +175,11 @@ class BulletImageEnum(Enum):
         PeaNormal="PeaNormal"
         PeaNormalExplode="PeaNormalExplode"
 BulletImagesArray=["BulletMushRoom","BulletMushRoomExplode","PeaIce","PeaNormal","PeaNormalExplode"]
+
+class BulletNames(Enum):
+        PeaNormal= "PeaNormal"
+        PeaIce = "PeaIce"
+        MushRoom = 'MushRoom'
 
 def get_zombie_image():
     dict = {}
@@ -231,4 +250,78 @@ Attack_Effect_Time = {
     AttackType.BlindAttack:{'time':20,'speed':0.0}
 }
 # --- end of attack types  ----------------------#
+
+
+#initialization state --- for every zombie
+# ----------------------------------------------------------------------------------S
+ 
+zombie_state_dict ={'speed':0.05,
+                'health':12.0,
+                'damage': 1.0,
+                'category':'normal',
+                'attack_interval':10,
+                'image_refresh_time':100,
+                'all_image': get_zombie_image(),
+                'attack_type': ZombieAttackType.NormalAttack,
+                'can_attack_all':False} 
+
+cone_head_zombie_state = {'speed':0.05,
+                'health':20.0,
+                'damage': 1.0,
+                'category':'normal',
+                'attack_interval':10,
+                'image_refresh_time':100,
+                'all_image': get_zombie_image(),
+                'attack_type': ZombieAttackType.NormalAttack,
+                'can_attack_all':False}
+
+Zombie_IntialState= {ZombieName.Zombie: zombie_state_dict,
+ZombieName.ConeheadZombie: cone_head_zombie_state
+
+} 
+
+
+
+# initialization state for plants
+#-----------------------------------------------------------------------------------
+pea_shooter_state_dict ={
+       'attack_interval':10,
+       'health':10,
+       'all_image':get_bullet_image(),
+       'attack_type':AttackType.NoAttack
+}
+
+Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict
+
+}
+#-----------------------------------------------------------------------------------
+
+#initialize state for bullets
+peashooter_bullet = {'can_attack_all':False,
+'speed':50,
+'damage':2,
+'attack_type':AttackType.NormalAttack,
+'image_refresh_time': 20
+'all_image':get_bullet_image(),
+'default_image':PeashooterImage.Peashooter
+
+}
+
+peashooter_ice_bullet = {'can_attack_all':False,
+'speed':50,
+'damage':2,
+'attack_type':AttackType.IceAttack,
+'image_refresh_time': 20
+'all_image':get_bullet_image(),
+'default_image':PeashooterImage.Peashooter
+
+}
+
+
+Bullet_InitialState ={ BulletNames.PeaNormal:peashooter_bullet,
+BulletNames.PeaIce:peashooter_ice_bullet}
+
+
+
+#below should be the function for creating zombies-----------------------------------------------------------------------------------------
 

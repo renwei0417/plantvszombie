@@ -1,204 +1,8 @@
 import pygame as pg
 import Tool
+from metainfo import *
 #from  zombie_const import * 
 from enum import Enum 
-
-
-#Image_related ============================================
-
-class PlantNameList(Enum):
-        CherryBomb ="CherryBomb"
-        Chomper ="Chomper"
-        HypnoShroom ="HypnoShroom"
-        IceShroom ="IceShroom"
-        Jalapeno ="Jalapeno"
-        Peashooter ="Peashooter"
-        PotatoMine ="PotatoMine"
-        PuffShroom ="PuffShroom"
-        RepeaterPea ="RepeaterPea"
-        ScaredyShroom ="ScaredyShroom"
-        SnowPea ="SnowPea"
-        Spikeweed ="Spikeweed"
-        Squash ="Squash"
-        Sun ="Sun"
-        SunFlower ="SunFlower"
-        SunShroom ="SunShroom"
-        Threepeater ="Threepeater"
-        WallNut ="WallNut"
-PlantIsSingleImageDict = {PlantNameList.CherryBomb:True,
-PlantNameList.Chomper:False,
-PlantNameList.HypnoShroom:False,
-PlantNameList.IceShroom:False,
-PlantNameList.Jalapeno:False,
-PlantNameList.Peashooter:True,
-PlantNameList.PotatoMine:False,
-PlantNameList.PuffShroom:False,
-PlantNameList.RepeaterPea:True,
-PlantNameList.ScaredyShroom:False,
-PlantNameList.SnowPea:True,
-PlantNameList.Spikeweed:False,
-PlantNameList.Squash:False,
-PlantNameList.Sun:True,
-PlantNameList.SunFlower:True,
-PlantNameList.SunShroom:False,
-PlantNameList.Threepeater:True,
-PlantNameList.WallNut:False
-}
-
-class CherryBombImage(Enum):
-        CherryBomb ="CherryBomb"
-
-class ChomperImage(Enum):
-        Chomper ="Chomper"
-        ChomperAttack ="ChomperAttack"
-        ChomperDigest ="ChomperDigest"
-
-class HypnoShroomImage(Enum):
-        HypnoShroom ="HypnoShroom"
-        HypnoShroomSleep ="HypnoShroomSleep"
-
-class IceShroomImage(Enum):
-        IceShroom ="IceShroom"
-        IceShroomSleep ="IceShroomSleep"
-        IceShroomSnow ="IceShroomSnow"
-        IceShroomTrap ="IceShroomTrap"
-
-class JalapenoImage(Enum):
-        Jalapeno ="Jalapeno"
-        JalapenoExplode ="JalapenoExplode"
-
-class PeashooterImage(Enum):
-        Peashooter ="Peashooter"
-
-class PotatoMineImage(Enum):
-        PotatoMine ="PotatoMine"
-        PotatoMineExplode ="PotatoMineExplode"
-        PotatoMineInit ="PotatoMineInit"
-
-class PuffShroomImage(Enum):
-        PuffShroom ="PuffShroom"
-        PuffShroomSleep ="PuffShroomSleep"
-
-class RepeaterPeaImage(Enum):
-        RepeaterPea ="RepeaterPea"
-
-class ScaredyShroomImage(Enum):
-        ScaredyShroom ="ScaredyShroom"
-        ScaredyShroomCry ="ScaredyShroomCry"
-        ScaredyShroomSleep ="ScaredyShroomSleep"
-
-class SnowPeaImage(Enum):
-        SnowPea ="SnowPea"
-
-class SpikeweedImage(Enum):
-        Spikeweed ="Spikeweed"
-
-class SquashImage(Enum):
-        Squash ="Squash"
-        SquashAim ="SquashAim"
-        SquashAttack ="SquashAttack"
-
-class SunImage(Enum):
-        Sun ="Sun"
-
-class SunFlowerImage(Enum):
-        SunFlower ="SunFlower"
-
-class SunShroomImage(Enum):
-        SunShroom ="SunShroom"
-        SunShroomBig ="SunShroomBig"
-        SunShroomSleep ="SunShroomSleep"
-
-class ThreepeaterImage(Enum):
-        Threepeater ="Threepeater"
-
-class WallNutImage(Enum):
-        RedWallNutBowling ="RedWallNutBowling"
-        RedWallNutBowlingExplode ="RedWallNutBowlingExplode"
-        WallNut ="WallNut"
-        WallNutBowling ="WallNutBowling"
-        WallNut_cracked1 ="WallNut_cracked1"
-        WallNut_cracked2 ="WallNut_cracked2"
-
-
-class ZombieImages(Enum):
-    Zombie = "Zombie"
-    ZombieAttack = "ZombieAttack"
-    ZombieDie = "ZombieDie"
-    ZombieHead= "ZombieHead"
-    ZombieLostHead = "ZombieLostHead"
-    ZombieLostHeadAttack = "ZombieLostHeadAttack"
-    BoomDie = "BoomDie"
-    NewspaperZombie = "NewspaperZombie"
-    NewspaperZombieAttack = "NewspaperZombieAttack"
-    NewspaperZombieDie = "NewspaperZombieDie"
-    NewspaperZombieLostHead = "NewspaperZombieLostHead"
-    NewspaperZombieLostHeadAttack = "NewspaperZombieLostHeadAttack"
-    NewspaperZombieNoPaper = "NewspaperZombieNoPaper"
-    NewspaperZombieNoPaperAttack = "NewspaperZombieNoPaperAttack"
-    FlagZombie = "FlagZombie"
-    FlagZombieAttack = "FlagZombieAttack"
-    FlagZombieLostHead = "FlagZombieLostHead"
-    FlagZombieLostHeadAttack = "FlagZombieLostHeadAttack"
-    ConeheadZombie = "ConeheadZombie"
-    ConeheadZombieAttack = "ConeheadZombieAttack"
-
-    BucketheadZombie = "BucketheadZombie"
-    BucketheadZombie = "BucketheadZombieAttack"
-
-class BulletImageType(Enum):
-    PeaNormal = "PeaNormal"
-    PeaNormalExplode = "PeaNormalExplode"
-    PeaIce = "PeaIce"
-    BulletMushRoom = "BulletMushRoom"
-    BulletMushRoomExplode = "BulletMushRoomExplode"
-
-#---------------zombie-------------plant----types #
-
-class ZombieState(Enum):
-    Normal =0
-    NormalAttack =1
-    Dying =2
-    Dead = 3 
-class BulletState(Enum):
-    Normal = 0  #正常是这样
-    Attacking = 1 #如果正在打击的话就这么打
-    Dead = 2 #如果死掉了或者出界了就算是死掉了。
-
-
-#================ImageName related ==============================
-
-
-
-
-# this is related to the attack times# --------------#
-class AttackType(Enum):
-    NoAttack =0
-    NormalAttack =1
-    IceAttack = 2
-    BlindAttack = 3
-    StopAttack = 4
-    BoomAttack = 5 
-    FireAttack =6 
-
-class ZombieAttackType:
-    NoAttack = 0
-    NormalAttack = 1
-
-Zombie_Attack_Effect_Time = {
-    ZombieAttackType.NoAttack: {'time':5, "speed":1.0},
-    ZombieAttackType.NormalAttack:{'time':20,'speed':0.0}
-}
-
-Attack_Effect_Time = {
-    AttackType.IceAttack: {'time':5, "speed":1.0},
-    AttackType.BlindAttack:{'time':20,'speed':0.0},
-    AttackType.StopAttack: {'time':20,'speed':0.0},
-    AttackType.IceAttack: {'time':20, "speed":0.5},
-    AttackType.BlindAttack:{'time':20,'speed':0.0}
-}
-# --- end of attack types  ----------------------#
-
 
 
 class ZombieInternalState:
@@ -313,7 +117,7 @@ class Zombie:
         #注意这个时候只是把状态记录下来，因为接下来需要看看
         self.state.temp_under_attack_dict[plantbullet_attack_type] = self.current_time
         self.state.health = self.state.health - damage
-        if self.state.health< = 0:
+        if self.state.health <= 0:
             self.zombie_state = ZombieState.Dying
         #self.state.current_time = current_time          
         return
@@ -357,9 +161,9 @@ class Zombie:
         speed = 1.0 
         if self.zombie_state == ZombieState.Dying: #僵尸要死了
             if  AttackType.BoomAttack in self.zombie_under_attack_list: #这说明僵尸是被雷炸死的
-                current_image = ZombieImages.BoomDie
+                current_image = ZombieImageArray.BoomDie
             else:
-                current_image = ZombieImages.ZombieDie
+                current_image = ZombieImageArray.ZombieDie
             if self.image_index == len(self.images)-1: #到了最后一帧了，设置直接僵尸死亡
                 self.zombie_state = ZombieState.Dead
             speed = 0.0 
@@ -468,12 +272,12 @@ class PeaShooterBullet:
             return 
 
         zombie_attack_list = []
-            for i in range(len(zombie_list)):
-                if self.rect.colliderect(zombie_list[i].rect):
-                    if plants_list[i].state()!= PlantStateType.Dying: #没死就可以攻击了
-                        zombie_attack_list.append(i)
+        for i in range(len(zombie_list)):
+            if self.rect.colliderect(zombie_list[i].rect):
+                if plants_list[i].state()!=  PlantState.Dead #没死就可以攻击了
+                    zombie_attack_list.append(i)
             #检测是否需要去攻击，那么现在可以攻击了吧，哈哈
-            if len(zombie_attack_list)>0 and self.state == BulletState.Normal 
+            if len(zombie_attack_list)>0 and self.state == BulletState.Normal :
                 #现在找到第一个僵尸然后进行攻击
                 zombie_to_attack = zombie_attack_list[0]
                 zombie_to_attack.accept_damage(self.damage, self.attack_type)
@@ -482,9 +286,9 @@ class PeaShooterBullet:
     def determine_image(self):  #只需要设置好图像即可
         current_image= self.image_name
         if self.state == BulletState.Normal:
-            current_image = BulletImageType.PeaNormal
+            current_image = BulletImageEnum.Normal
         if self.state == BulletState.Attacking:
-            current_image= BulletImageType.PeaNormalExplode
+            current_image= BulletImageEnum.PeaNormalExplode
         return current_image
 
     def update(self):
@@ -521,11 +325,6 @@ class PeaShooterBullet:
 
             return 
 
-class PlantState(Enum):
-    Normal =0, 
-    Attacking = 1, 
-    Sleeping = 2, 
-    Dead = 3 
 
     
 
@@ -582,7 +381,7 @@ class Peashooter:
     def set_under_attack_state(self): 
         for k, v in self.temp_under_attack_dict.items():
             time  = v
-            if k == ZombieAttackType.NormalAttack
+            if k == ZombieAttackType.NormalAttack:
                 self.under_attack_dict[k] = self.current_time
         self.temp_under_attack_dict.clear()
 
@@ -596,7 +395,7 @@ class Peashooter:
                     self.under_attack_list.append(k)
     def determine_image(self):
         current_image = self.image_name
-        return self.
+        return current_image
 
         
         
