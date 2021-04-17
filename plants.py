@@ -163,7 +163,7 @@ class PeaShooterBullet:
 
 
 class ZombieInternalState:
-    def __init__(self, **kwargs):
+    def __init__(self, kwargs):
         self.const_speed = kwargs['speed']
         self.const_health = kwargs['health']
         self.health = self.const_health
@@ -174,9 +174,7 @@ class ZombieInternalState:
         self.attack_interval = kwargs['attack_interval']
         self.attack_type = kwargs['attack_type']
         self.image_refresh_time = kwargs['image_refresh_time']
-        self.time_since_last_image_refresh = None 
-        self.previous_time = None 
-        self.current_time = None 
+        self.time_since_last_image_refresh = 0 
         self.is_attacking = False
         self.last_attack_time = None 
         self.is_freezed = False  
@@ -194,11 +192,11 @@ class ZombieInternalState:
 
 
 class Zombie:
-    def __init__(self, **kwargs):
+    def __init__(self, dict):
         #self.name = name
-        self.state = ZombieInternalState(kwargs)
+        self.state = ZombieInternalState(dict)
 
-        self.all_zombie_image = kwargs['all_zombie_image']
+        self.all_zombie_image = dict['all_image']
 
         #这两个变量是僵尸中最重要的变量
         self.zombie_state = ZombieState.Normal
@@ -210,12 +208,18 @@ class Zombie:
         self.zombie_under_attack_list= {}
  
         self.image_index = 0
-        self.image_name = Tool.ZombieImages.Zombie  #初始设置为直接的僵尸
+        self.image_name =ZombieImages.Zombie  #初始设置为直接的僵尸
         self.images = []
+        self.current_time =0
+        self.previous_time =0 
+        self.movement = 0.0 
     
 
     #攻击植物
-    def attack(self, plants_list, current_time):
+    def update_time(self, current_time):
+        self.previous_time = self.current_time
+        self.current_time = current_time
+    def attack(self, plants_list):
         # 如果现在还在攻击的过程中，并且攻击的过程中还没有
 
         if self.zombie_state == ZombieState.Dying:  #死了就不用攻击了把
@@ -248,16 +252,15 @@ class Zombie:
                     #是否需要更新时间呢？
                 else:
                     plants_list[0].accept_damage(self.state.damage, self.state.attack_type, current_time)
-                    self.state.last_attack_time = current_time
+                    self.state.last_attack_time = self.current_image
                     self.zombie_state = ZombieState.NormalAttack
             if self.zombie_state == ZombieState.NormalAttack:
-                if current_time - self.state.last_attack_time  < self.state.attack_interval:
+                if self.current_time - self.state.last_attack_time  < self.state.attack_interval:
                     return 
         else:
             if self.zombie_state == ZombieState.NormalAttack:
                 self.zombie_state == ZombieState.Normal
-        self.state.previous_time = self.state.current_time
-        self.state.current_time = current_time
+        #self.state.current_time = current_time
 
 
 
@@ -266,11 +269,10 @@ class Zombie:
 
          
         return 
-    def accept_damage(self, damage, plantbullet_attack_type, current_time):
+    def accept_damage(self, damage, plantbullet_attack_type):
         #注意这个时候只是把状态记录下来，因为接下来需要看看
-        self.state_change.temp_attack_dict[plantbullet_attack_type] = (current_time, damage)
-        self.state.current_time = current_time
-            
+        self.state.temp_attack_dict[plantbullet_attack_type] = (self.current_time, damage)
+        #self.state.current_time = current_time          
         return
 #注意下面的函数应该智能自己来调用
     def reduce_health(self):
@@ -366,14 +368,14 @@ class Zombie:
 
         image_name, speed = self.determine_image()
         self.images = self.state.all_image[image_name]
-        self.state.speed = speed 
+        self.state.speed = speed * self.state.const_speed 
 
         if self.image_name == image_name: #相等的话那么则增加一个，当然得看时间
             if self.state.time_since_last_image_refresh > self.state.image_refresh_time:
                 self.image_index =  (self.image_index + 1) % len(self.images)
                 self.state.time_since_last_image_refresh = 0 
             else:
-                 self.state.time_since_last_image_refresh = self.state.time_since_last_image_refresh + self.state.current_time - self.state.previous_time
+                 self.state.time_since_last_image_refresh = self.state.time_since_last_image_refresh + self.current_time - self.previous_time
         else:
             self.image_index =0 
             self.state.time_since_last_image_refresh = 0
@@ -388,10 +390,15 @@ class Zombie:
     def draw(self, Screen):
         #如果underattack，那么图像在一段时间内需要alpha变化一段时间，也就是仅此而已
         #如果受到了多重攻击，可能就需要做一些改变了
-        time_interval = self.state.current_time - self.state.previous_time
-        self.state.rect.x = self.state.rect.x - time_interval* self.speed
+        time_interval = self.current_time - self.previous_time
+        self.movement = self.movement + time_interval* self.state.speed
 
-        Screen.blit(self.iamges[self.image_index], self.state.rect)
+
+        if self.movement > 1.0:
+            self.movement = 0.0 
+            self.state.rect.x = self.state.rect.x - 1
+        print(self.state.rect.x, self.current_time)
+        Screen.blit(self.images[self.image_index], self.state.rect)
 
         return 
 

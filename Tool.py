@@ -135,6 +135,7 @@ def get_level_2_images(path,colorkey=C.Constant_Color.WHITE, accept=('.png', '.j
         for path_level_1 in os.listdir(os.path.join(path, path_level)):
             images = load_image_frames(os.path.join(path,path_level, path_level_1,),path_level_1,C.Constant_Color.WHITE,('.png', '.jpg', '.bmp', '.gif'))
             image_dict[path_level_1] = images 
+    return image_dict
 
 
 
