@@ -39,7 +39,7 @@ for i in range(0,5,2):
     # panelSelector=PlanSelect.PanelSelector()
     # panelSelector.Draw(Tool.Screen)
     plant_x, plant_y = map_grid.GetCorxCorY(0+ i*grid_x)
-    plant_initial_state =  GetPlantInitialState(PlantNameEnum.Peashooter)
+    plant_initial_state =  GetPlantInitialState(PlantNameEnum.SnowPea)
     plant_initial_state['rect'] = pg.rect.Rect(plant_x,plant_y,80, 100)
     pea_shooter= plants.Peashooter(plant_initial_state)
     plant_list.append(pea_shooter)

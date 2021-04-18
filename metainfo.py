@@ -241,16 +241,16 @@ class ZombieAttackType:
     NormalAttack = 1
 
 Zombie_Attack_Effect_Time = {
-    ZombieAttackType.NoAttack: {'time':5, "speed":1.0},
-    ZombieAttackType.NormalAttack:{'time':20,'speed':0.0}
+    ZombieAttackType.NoAttack: {'time':5000, "speed":1.0},
+    ZombieAttackType.NormalAttack:{'time':5000,'speed':0.0}
 }
 
 Attack_Effect_Time = {
-    AttackType.IceAttack: {'time':5, "speed":1.0},
-    AttackType.BlindAttack:{'time':20,'speed':0.0},
-    AttackType.StopAttack: {'time':20,'speed':0.0},
-    AttackType.IceAttack: {'time':20, "speed":0.5},
-    AttackType.BlindAttack:{'time':20,'speed':0.0}
+    AttackType.IceAttack: {'time':5000, "speed":1.0},
+    AttackType.BlindAttack:{'time': 5000,'speed':0.0},
+    AttackType.StopAttack: {'time':5000,'speed':0.0},
+    AttackType.IceAttack: {'time':5000, "speed":0.5},
+    AttackType.BlindAttack:{'time':5000,'speed':0.0}
 }
 # --- end of attack types  ----------------------#
 
@@ -342,7 +342,8 @@ snow_pea_shooter_state_dict ={
 }
 
 
-Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict
+Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict,
+PlantNameEnum.SnowPea:snow_pea_shooter_state_dict
 
 }
 #-----------------------------------------------------------------------------------

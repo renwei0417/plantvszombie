@@ -138,7 +138,8 @@ class Zombie:
         #解析来根据新的状态来设置最终的状态
 
         self.under_attack_list.clear()
-        for k, v in self.under_attack_dict.items():
+        under_attack_keys = list(self.under_attack_dict.keys())
+        for k in under_attack_keys:
             if k == AttackType.IceAttack or  k == AttackType.BlindAttack: #寒冰射手一类的
                 if self.current_time- self.under_attack_dict[k] > Attack_Effect_Time[k]['time']:
                     self.under_attack_dict.pop(k,None) #注意已经结束了， BlindAttack也结束了。
@@ -255,6 +256,7 @@ class PeaShooterBullet:
         self.current_time =0
         self.state = BulletState.Normal
         self.rect = dict[PeaShooterBulletStateKeyEnum.rect]
+        self.default_image = dict[PeaShooterBulletStateKeyEnum.default_image]
 
         self.time_since_last_image_refresh = 0 
         #图像相关
@@ -296,7 +298,7 @@ class PeaShooterBullet:
     def determine_image(self):  #只需要设置好图像即可
         current_image= self.image_name
         if self.state == BulletState.Normal:
-            current_image = BulletImageEnum.PeaNormal
+            current_image = self.default_image
         if self.state == BulletState.Attacking:
             current_image= BulletImageEnum.PeaNormalExplode
         return current_image
