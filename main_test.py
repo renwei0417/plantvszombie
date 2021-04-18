@@ -6,6 +6,7 @@ import Tool
 import PlanSelect
 import game_play
 import plants 
+from metainfo import * 
 
 
 
@@ -13,7 +14,7 @@ import plants
 background_image_index=0
 background_image_name='Background'
 BackGroundImage=Tool.All_Images[background_image_name][background_image_index]
-viewpoint=Tool.Screen.get_rect();
+viewpoint=Tool.Screen.get_rect()
 viewpoint.x+=C.Constant_MapComponent.BACKGROUND_OFFSET_X
 Tool.Screen.blit(BackGroundImage,(0,0),viewpoint )
 grid_x = 9
@@ -21,26 +22,27 @@ grid_y =5
 map_grid = Tool.Grid(grid_y, grid_x , 30, 80, 80, 100)
 zombie_image = Tool.Zombie_Images
 zombie_list = []
+plant_list =[]
+bullet_list = []
 
-for i in range(5):
+for i in range(0,5,2):
 
     # panelSelector=PlanSelect.PanelSelector()
     # panelSelector.Draw(Tool.Screen)
     zombie_x, zombie_y = map_grid.GetCorxCorY(8+ i*grid_x)
-    zombie_meta_data_dict ={
-        'speed':0.05,
-        'health':12.0,
-        'rect': pg.rect.Rect(zombie_x,zombie_y,80, 100),
-        'damage': 1.0,
-        'category':'normal',
-        'attack_interval':10,
-        'image_refresh_time':100,
-        'all_image': zombie_image,
-        'attack_type': plants.AttackType.NormalAttack,
-        'can_attack_all':False
-    }
-    a_zombie= plants.Zombie(zombie_meta_data_dict)
+    zombie_initial_state =  GetZombieInitialState(ZombieName.Zombie)
+    zombie_initial_state[ZombieInitialStateKeyEnum.rect] = pg.rect.Rect(zombie_x ,zombie_y - 50,80, 100)
+    a_zombie= plants.Zombie(zombie_initial_state)
     zombie_list.append(a_zombie)
+for i in range(0,5,2):
+
+    # panelSelector=PlanSelect.PanelSelector()
+    # panelSelector.Draw(Tool.Screen)
+    plant_x, plant_y = map_grid.GetCorxCorY(0+ i*grid_x)
+    plant_initial_state =  GetPlantInitialState(PlantNameEnum.Peashooter)
+    plant_initial_state['rect'] = pg.rect.Rect(plant_x,plant_y,80, 100)
+    pea_shooter= plants.Peashooter(plant_initial_state)
+    plant_list.append(pea_shooter)
 
 
 pg.display.flip()
@@ -71,7 +73,6 @@ pg.time.set_timer(timer_event, time_delay)
 
 initialize_time = current_time
 
-add_zombie  = False
 
 
 while not done:
@@ -101,55 +102,64 @@ while not done:
     #level_play.ProcessEvent(x, y, left_click, right_click, current_time)
     Tool.Screen.fill((0,0,0))
     Tool.Screen.blit(BackGroundImage,(0,0),viewpoint )
+    #首先植物攻击
+    for plant in plant_list:
+        plant.update_time(current_time)
+        bullets = plant.attack(zombie_list)
+        if bullets is not None:
+            bullet_list.extend(bullets)
+
+
+    #其次子弹来攻击：
+    for bullet in bullet_list:
+        bullet.update_time(current_time)
+        bullet.attack(zombie_list)
+
+    #现在来僵尸攻击
     for zombie in zombie_list: 
         zombie.update_time(current_time)
-        zombie.accept_damage(0.0, plants.AttackType.NoAttack)
-        zombie.attack([])
-        zombie.update(current_time)
-        zombie.draw(Tool.Screen)
-    #level_play.Draw(Tool.Screen)
+        zombie.attack(plant_list)
+    
+    #现在来刷新了
+    for plant in plant_list:
+        plant.update()
+    
+    for bullet in bullet_list:
+        bullet.update()
+    for zombie in zombie_list:
+        zombie.update()
 
-    if current_time - initialize_time >5000 and  current_time - initialize_time <= 10000 and not add_zombie:
-        add_zombie = True 
-        for i in range(5):
-            zombie_x, zombie_y = map_grid.GetCorxCorY(8+ i*grid_x)
-            zombie_meta_data_dict ={
-                'speed':0.05,
-                'health':12.0,
-                'rect': pg.rect.Rect(zombie_x,zombie_y,80, 100),
-                'damage': 1.0,
-                'category':'normal',
-                'attack_interval':10,
-                'image_refresh_time':100,
-                'all_image': zombie_image,
-                'attack_type': plants.AttackType.NormalAttack,
-                'can_attack_all':False
-            }
-            a_zombie= plants.Zombie(zombie_meta_data_dict)
-            zombie_list.append(a_zombie)
-    if current_time - initialize_time >10000 and  add_zombie:
-        add_zombie = False 
-        for i in range(5):
-            zombie_x, zombie_y = map_grid.GetCorxCorY(8+ i*grid_x)
-            zombie_meta_data_dict ={
-                'speed':0.05,
-                'health':12.0,
-                'rect': pg.rect.Rect(zombie_x,zombie_y,80, 100),
-                'damage': 1.0,
-                'category':'normal',
-                'attack_interval':10,
-                'image_refresh_time':100,
-                'all_image': zombie_image,
-                'attack_type': plants.AttackType.NormalAttack,
-                'can_attack_all':False
-            }
-            a_zombie= plants.Zombie(zombie_meta_data_dict)
-            zombie_list.append(a_zombie)
+    #现在把死掉的干掉
+
+    plant_list_alive = []
+    for plant in plant_list:
+        if plant.get_state() != PlantState.Dead:
+            plant_list_alive.append(plant)
+            plant.draw(Tool.Screen)
+    plant_list = plant_list_alive
+
+    bullet_list_alive = []
+    for bullet  in bullet_list:
+        if bullet.get_state() != BulletState.Dead:
+            bullet_list_alive.append(bullet)
+            bullet.draw(Tool.Screen)
+    bullet_list = bullet_list_alive
+
+    zombie_list_alive = []
+    for zombie  in zombie_list:
+        if zombie.get_state() != ZombieState.Dead:
+            zombie_list_alive.append(zombie)
+            zombie.draw(Tool.Screen)
+    zombie_list = zombie_list_alive
+
+    
         
 
     pg.display.update()
     mouse_pos=[None,None]
     mouse_click=[None,None]
+
+    print(len(bullet_list))
 
 
 

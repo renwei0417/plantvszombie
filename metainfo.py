@@ -5,74 +5,74 @@ from enum import Enum
 
 
 #Plants based  ============================================
-class CherryBombImage(Enum):    
+class CherryBombImage:    
         CherryBomb ="CherryBomb"
 
-class ChomperImage(Enum):
+class ChomperImage:
         Chomper ="Chomper"
         ChomperAttack ="ChomperAttack"      
         ChomperDigest ="ChomperDigest"      
 
-class HypnoShroomImage(Enum):
+class HypnoShroomImage:
         HypnoShroom ="HypnoShroom"
         HypnoShroomSleep ="HypnoShroomSleep"
 
-class IceShroomImage(Enum):
+class IceShroomImage:
         IceShroom ="IceShroom"
         IceShroomSleep ="IceShroomSleep"    
         IceShroomSnow ="IceShroomSnow"      
         IceShroomTrap ="IceShroomTrap"      
 
-class JalapenoImage(Enum):
+class JalapenoImage:
         Jalapeno ="Jalapeno"
         JalapenoExplode ="JalapenoExplode"
 
-class PeashooterImage(Enum):
+class PeashooterImage:
         Peashooter ="Peashooter"
 
-class PotatoMineImage(Enum):
+class PotatoMineImage:
         PotatoMine ="PotatoMine"
         PotatoMineExplode ="PotatoMineExplode"
         PotatoMineInit ="PotatoMineInit"
 
-class PuffShroomImage(Enum):
+class PuffShroomImage:
         PuffShroom ="PuffShroom"
         PuffShroomSleep ="PuffShroomSleep"
 
-class RepeaterPeaImage(Enum):
+class RepeaterPeaImage:
         RepeaterPea ="RepeaterPea"
 
-class ScaredyShroomImage(Enum):
+class ScaredyShroomImage:
         ScaredyShroom ="ScaredyShroom"
         ScaredyShroomCry ="ScaredyShroomCry"
         ScaredyShroomSleep ="ScaredyShroomSleep"
 
-class SnowPeaImage(Enum):
+class SnowPeaImage:
         SnowPea ="SnowPea"
 
-class SpikeweedImage(Enum):
+class SpikeweedImage:
         Spikeweed ="Spikeweed"
 
-class SquashImage(Enum):
+class SquashImage:
         Squash ="Squash"
         SquashAim ="SquashAim"
         SquashAttack ="SquashAttack"
 
-class SunImage(Enum):
+class SunImage:
         Sun ="Sun"
 
-class SunFlowerImage(Enum):
+class SunFlowerImage:
         SunFlower ="SunFlower"
 
-class SunShroomImage(Enum):
+class SunShroomImage:
         SunShroom ="SunShroom"
         SunShroomBig ="SunShroomBig"
         SunShroomSleep ="SunShroomSleep"
 
-class ThreepeaterImage(Enum):
+class ThreepeaterImage:
         Threepeater ="Threepeater"
 
-class WallNutImage(Enum):
+class WallNutImage:
         RedWallNutBowling ="RedWallNutBowling"
         RedWallNutBowlingExplode ="RedWallNutBowlingExplode"
         WallNut ="WallNut"
@@ -80,7 +80,7 @@ class WallNutImage(Enum):
         WallNut_cracked1 ="WallNut_cracked1"
         WallNut_cracked2 ="WallNut_cracked2"
 
-class PlantNameEnum(Enum):
+class PlantNameEnum:
         CherryBomb ="CherryBomb"
         Chomper ="Chomper"
         HypnoShroom ="HypnoShroom"
@@ -124,7 +124,7 @@ PlantNameEnum.WallNut:["RedWallNutBowling","RedWallNutBowlingExplode","WallNut",
 
 #------------------zombie_images------------------------#
 
-class ZombieImageEnum(Enum):
+class ZombieImageEnum:
         BucketheadZombie="BucketheadZombie"
         BucketheadZombieAttack="BucketheadZombieAttack"
         
@@ -155,7 +155,7 @@ class ZombieImageEnum(Enum):
 
 ZombieImageArray=["BucketheadZombie","BucketheadZombieAttack","ConeheadZombie","ConeheadZombieAttack","FlagZombie","FlagZombieAttack","FlagZombieLostHead","FlagZombieLostHeadAttack","NewspaperZombie","NewspaperZombieAttack","NewspaperZombieDie","NewspaperZombieLostHead","NewspaperZombieLostHeadAttack","NewspaperZombieNoPaper","NewspaperZombieNoPaperAttack","BoomDie","Zombie","ZombieAttack","ZombieDie","ZombieHead","ZombieLostHead","ZombieLostHeadAttack"]
 
-class ZombieName(Enum):
+class ZombieName:
         Zombie = "Zombie"
         NewspaperZombie = "NewspaperZombie"
         FlagZombie = "FlagZombie"
@@ -168,7 +168,7 @@ class ZombieName(Enum):
 
 #-------------------------------------------------------------------------------------------
 
-class BulletImageEnum(Enum):
+class BulletImageEnum:
         BulletMushRoom="BulletMushRoom"
         BulletMushRoomExplode="BulletMushRoomExplode"
         PeaIce="PeaIce"
@@ -176,7 +176,7 @@ class BulletImageEnum(Enum):
         PeaNormalExplode="PeaNormalExplode"
 BulletImagesArray=["BulletMushRoom","BulletMushRoomExplode","PeaIce","PeaNormal","PeaNormalExplode"]
 
-class BulletNames(Enum):
+class BulletNames:
         PeaNormal= "PeaNormal"
         PeaIce = "PeaIce"
         MushRoom = 'MushRoom'
@@ -207,24 +207,27 @@ def get_bullet_image():
 
 #---------------zombie-------------plant----types #
 
-class ZombieState(Enum):
+class ZombieState:
     Normal =0
     NormalAttack =1
     Dying =2
     Dead = 3 
-class BulletState(Enum):
+class BulletState:
     Normal = 0  #正常是这样
     Attacking = 1 #如果正在打击的话就这么打
     Dead = 2 #如果死掉了或者出界了就算是死掉了。
 
-
+class PlantState:
+        Normal = 0
+        Attacking = 1
+        Dead = 2
 #================ImageName related ==============================
 
 
 
 
 # this is related to the attack times# --------------#
-class AttackType(Enum):
+class AttackType:
     NoAttack =0
     NormalAttack =1
     IceAttack = 2
@@ -254,26 +257,48 @@ Attack_Effect_Time = {
 
 #initialization state --- for every zombie
 # ----------------------------------------------------------------------------------S
- 
-zombie_state_dict ={'speed':0.05,
-                'health':12.0,
-                'damage': 1.0,
-                'category':'normal',
-                'attack_interval':10,
-                'image_refresh_time':100,
-                'all_image': get_zombie_image(),
-                'attack_type': ZombieAttackType.NormalAttack,
-                'can_attack_all':False} 
 
-cone_head_zombie_state = {'speed':0.05,
-                'health':20.0,
-                'damage': 1.0,
-                'category':'normal',
-                'attack_interval':10,
-                'image_refresh_time':100,
-                'all_image': get_zombie_image(),
-                'attack_type': ZombieAttackType.NormalAttack,
-                'can_attack_all':False}
+class ZombieInitialStateKeyEnum:
+        speed ='speed'
+        health ='health'
+        attack_interval = 'attack_interval'
+        image_refresh_time = 'image_refresh_time'
+        all_image = 'all_image'
+        attack_type= 'attack_type'
+        can_attack_all = 'can_attack_all'
+        rect = 'rect'
+        damage= 'damage'
+        id = 'id'
+
+zombie_state_dict ={ZombieInitialStateKeyEnum.speed:0.01,
+                ZombieInitialStateKeyEnum.health:12.0,
+                ZombieInitialStateKeyEnum.damage: 1.0,
+                ZombieInitialStateKeyEnum.attack_interval:10,
+                ZombieInitialStateKeyEnum.image_refresh_time:100,
+                ZombieInitialStateKeyEnum.all_image: get_zombie_image(),
+                ZombieInitialStateKeyEnum.attack_type: ZombieAttackType.NormalAttack,
+                ZombieInitialStateKeyEnum.can_attack_all:False} 
+
+class ConeHeadZombieInitialStateKeyEnum:
+        speed ='speed'
+        health ='health'
+        attack_interval = 'attack_interval'
+        image_refresh_time = 'image_refresh_time'
+        all_image = 'all_image'
+        attack_type= 'attack_type'
+        can_attack_all = 'can_attack_all'
+        rect = 'rect'
+        damage = 'damage'
+        id = 'id'
+
+cone_head_zombie_state = {ConeHeadZombieInitialStateKeyEnum.speed:0.01,
+                ConeHeadZombieInitialStateKeyEnum.health:20.0,
+                ConeHeadZombieInitialStateKeyEnum.damage: 1.0,
+                ConeHeadZombieInitialStateKeyEnum.attack_interval:10,
+                ConeHeadZombieInitialStateKeyEnum.image_refresh_time:100,
+                ConeHeadZombieInitialStateKeyEnum.all_image: get_zombie_image(),
+                ConeHeadZombieInitialStateKeyEnum.attack_type: ZombieAttackType.NormalAttack,
+                ConeHeadZombieInitialStateKeyEnum.can_attack_all:False}
 
 Zombie_IntialState= {ZombieName.Zombie: zombie_state_dict,
 ZombieName.ConeheadZombie: cone_head_zombie_state
@@ -284,12 +309,38 @@ ZombieName.ConeheadZombie: cone_head_zombie_state
 
 # initialization state for plants
 #-----------------------------------------------------------------------------------
+
+class PeaShooterStateKeyEnum:
+        attack_interval='attack_interval'
+        health = 'health'
+        all_image ='all_image'
+        attack_type = 'attack_type'
+        default_Image = 'default_Image'
+        rect = 'rect'
+        image_refresh_time = 'image_refresh_time'
+        speed = 'speed'
+        id = 'id'
+
 pea_shooter_state_dict ={
-       'attack_interval':10,
-       'health':10,
-       'all_image':get_bullet_image(),
-       'attack_type':AttackType.NoAttack
+       PeaShooterStateKeyEnum.attack_interval:5000,
+       PeaShooterStateKeyEnum.health:10,
+       PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.Peashooter),
+       PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
+       PeaShooterStateKeyEnum.default_Image : PeashooterImage.Peashooter,
+       PeaShooterStateKeyEnum.image_refresh_time : 40,
+       PeaShooterStateKeyEnum.speed : 0.0
 }
+
+snow_pea_shooter_state_dict ={
+       PeaShooterStateKeyEnum.attack_interval:5000,
+       PeaShooterStateKeyEnum.health:10,
+       PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.SnowPea),
+       PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
+       PeaShooterStateKeyEnum.default_Image : SnowPeaImage.SnowPea,
+       PeaShooterStateKeyEnum.image_refresh_time : 40,
+       PeaShooterStateKeyEnum.speed : 0.0
+}
+
 
 Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict
 
@@ -297,31 +348,90 @@ Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict
 #-----------------------------------------------------------------------------------
 
 #initialize state for bullets
-peashooter_bullet = {'can_attack_all':False,
-'speed':50,
-'damage':2,
-'attack_type':AttackType.NormalAttack,
-'image_refresh_time': 20
-'all_image':get_bullet_image(),
-'default_image':PeashooterImage.Peashooter
+
+
+class PeaShooterBulletStateKeyEnum:
+        attack_interval='attack_interval'
+        health = 'health'
+        all_image ='all_image'
+        attack_type = 'attack_type'
+        can_attack_all = 'can_attack_all'
+        speed= 'speed'
+        image_refresh_time = 'image_refresh_time'
+        default_image= 'default_image'
+        damage = 'damage'
+        rect = 'rect'
+        id = 'id'
+
+peashooter_bullet_initial_dict = {PeaShooterBulletStateKeyEnum.can_attack_all:False,
+PeaShooterBulletStateKeyEnum.speed:0.3,
+PeaShooterBulletStateKeyEnum.damage:10,
+PeaShooterBulletStateKeyEnum.attack_type:AttackType.NormalAttack,
+PeaShooterBulletStateKeyEnum.image_refresh_time: 500,
+PeaShooterBulletStateKeyEnum.all_image:get_bullet_image(),
+PeaShooterBulletStateKeyEnum.default_image:BulletImageEnum.PeaNormal
 
 }
 
-peashooter_ice_bullet = {'can_attack_all':False,
-'speed':50,
-'damage':2,
-'attack_type':AttackType.IceAttack,
-'image_refresh_time': 20
-'all_image':get_bullet_image(),
-'default_image':PeashooterImage.Peashooter
+peashooter_ice_bullet_initial_dict= {PeaShooterBulletStateKeyEnum.can_attack_all:False,
+PeaShooterBulletStateKeyEnum.speed:0.1,
+PeaShooterBulletStateKeyEnum.damage:2,
+PeaShooterBulletStateKeyEnum.attack_type:AttackType.IceAttack,
+PeaShooterBulletStateKeyEnum.image_refresh_time: 500,
+PeaShooterBulletStateKeyEnum.all_image:get_bullet_image(),
+PeaShooterBulletStateKeyEnum.default_image:BulletImageEnum.PeaIce
 
 }
 
 
-Bullet_InitialState ={ BulletNames.PeaNormal:peashooter_bullet,
-BulletNames.PeaIce:peashooter_ice_bullet}
+Bullet_InitialState ={ BulletNames.PeaNormal:peashooter_bullet_initial_dict,
+BulletNames.PeaIce:peashooter_ice_bullet_initial_dict}
+
+
+
 
 
 
 #below should be the function for creating zombies-----------------------------------------------------------------------------------------
+
+global_zombie_id = 0
+global_bullet_id = 0
+global_plant_id =0
+
+def GetZombieInitialState(zombie_name):
+        global global_zombie_id
+        if zombie_name not in Zombie_IntialState:
+                raise ValueError(f'zombie type {zombie_name} is not supported')
+        else:
+                id = global_zombie_id
+                global_zombie_id = global_zombie_id + 1
+                dict = Zombie_IntialState[zombie_name]
+                dict[ZombieInitialStateKeyEnum.id] = id
+                return dict
+def GetBulletInitialState(bullet_name):
+        global global_bullet_id
+        if bullet_name not in Bullet_InitialState:
+                raise ValueError(f'bullet type {zombie_name} is not supported')
+        else:
+                id = global_bullet_id
+                global_bullet_id = global_bullet_id + 1
+                dict =  Bullet_InitialState[bullet_name]
+                dict[PeaShooterBulletStateKeyEnum.id] = id
+                return dict 
+def GetPlantInitialState(plant_name):
+        global global_plant_id
+        if plant_name not in Plants_IntialState:
+                raise ValueError(f'plant type {plant_name} is not supported')
+        else:
+                id = global_plant_id
+                global_plant_id = global_plant_id + 1
+                dict =  Plants_IntialState[plant_name]
+                dict[PeaShooterStateKeyEnum.id] = id 
+                return dict 
+
+# below are boundary
+Straight_Bullet_X_Max= 800
+Straight_Bullet_Y_Max = 600
+
+
 
