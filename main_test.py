@@ -38,11 +38,21 @@ for i in range(0,5,2):
 
     # panelSelector=PlanSelect.PanelSelector()
     # panelSelector.Draw(Tool.Screen)
-    plant_x, plant_y = map_grid.GetCorxCorY(0+ i*grid_x)
-    plant_initial_state =  GetPlantInitialState(PlantNameEnum.SnowPea)
-    plant_initial_state['rect'] = pg.rect.Rect(plant_x,plant_y,80, 100)
-    pea_shooter= plants.Peashooter(plant_initial_state)
-    plant_list.append(pea_shooter)
+    plant_x, plant_y = map_grid.GetCorxCorY(1+ i*grid_x)
+    if i == 4:
+        plant_initial_state =  GetPlantInitialState(PlantNameEnum.Peashooter)
+        plant_initial_state['rect'] = pg.rect.Rect(plant_x,plant_y,80, 100)
+        pea_shooter= plants.Peashooter(plant_initial_state)
+        plant_list.append(pea_shooter)
+    else:
+        plant_initial_state =  GetPlantInitialState(PlantNameEnum.SnowPea)
+        plant_initial_state['rect'] = pg.rect.Rect(plant_x,plant_y,80, 100)
+        pea_shooter= plants.Peashooter(plant_initial_state)
+        plant_list.append(pea_shooter)
+
+
+
+
 
 
 pg.display.flip()
@@ -97,7 +107,7 @@ while not done:
     x,y=mouse_pos
     left_click,right_click=mouse_click
     current_time = pg.time.get_ticks()
-    print(current_time)
+    #print(current_time)
 
     #level_play.ProcessEvent(x, y, left_click, right_click, current_time)
     Tool.Screen.fill((0,0,0))
@@ -159,7 +169,7 @@ while not done:
     mouse_pos=[None,None]
     mouse_click=[None,None]
 
-    print(len(bullet_list))
+    #print(len(bullet_list))
 
 
 

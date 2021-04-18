@@ -246,7 +246,7 @@ Zombie_Attack_Effect_Time = {
 }
 
 Attack_Effect_Time = {
-    AttackType.IceAttack: {'time':5000, "speed":1.0},
+    AttackType.IceAttack: {'time':5000, "speed":0.3},
     AttackType.BlindAttack:{'time': 5000,'speed':0.0},
     AttackType.StopAttack: {'time':5000,'speed':0.0},
     AttackType.IceAttack: {'time':5000, "speed":0.5},
@@ -270,10 +270,10 @@ class ZombieInitialStateKeyEnum:
         damage= 'damage'
         id = 'id'
 
-zombie_state_dict ={ZombieInitialStateKeyEnum.speed:0.01,
+zombie_state_dict ={ZombieInitialStateKeyEnum.speed:0.03,
                 ZombieInitialStateKeyEnum.health:12.0,
-                ZombieInitialStateKeyEnum.damage: 1.0,
-                ZombieInitialStateKeyEnum.attack_interval:10,
+                ZombieInitialStateKeyEnum.damage: 10.0,
+                ZombieInitialStateKeyEnum.attack_interval:1000,
                 ZombieInitialStateKeyEnum.image_refresh_time:100,
                 ZombieInitialStateKeyEnum.all_image: get_zombie_image(),
                 ZombieInitialStateKeyEnum.attack_type: ZombieAttackType.NormalAttack,
@@ -293,8 +293,8 @@ class ConeHeadZombieInitialStateKeyEnum:
 
 cone_head_zombie_state = {ConeHeadZombieInitialStateKeyEnum.speed:0.01,
                 ConeHeadZombieInitialStateKeyEnum.health:20.0,
-                ConeHeadZombieInitialStateKeyEnum.damage: 1.0,
-                ConeHeadZombieInitialStateKeyEnum.attack_interval:10,
+                ConeHeadZombieInitialStateKeyEnum.damage: 10.0,
+                ConeHeadZombieInitialStateKeyEnum.attack_interval:1000,
                 ConeHeadZombieInitialStateKeyEnum.image_refresh_time:100,
                 ConeHeadZombieInitialStateKeyEnum.all_image: get_zombie_image(),
                 ConeHeadZombieInitialStateKeyEnum.attack_type: ZombieAttackType.NormalAttack,
@@ -323,7 +323,7 @@ class PeaShooterStateKeyEnum:
 
 pea_shooter_state_dict ={
        PeaShooterStateKeyEnum.attack_interval:5000,
-       PeaShooterStateKeyEnum.health:10,
+       PeaShooterStateKeyEnum.health:25,
        PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.Peashooter),
        PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
        PeaShooterStateKeyEnum.default_Image : PeashooterImage.Peashooter,
@@ -333,7 +333,7 @@ pea_shooter_state_dict ={
 
 snow_pea_shooter_state_dict ={
        PeaShooterStateKeyEnum.attack_interval:5000,
-       PeaShooterStateKeyEnum.health:10,
+       PeaShooterStateKeyEnum.health:25,
        PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.SnowPea),
        PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
        PeaShooterStateKeyEnum.default_Image : SnowPeaImage.SnowPea,
@@ -366,7 +366,7 @@ class PeaShooterBulletStateKeyEnum:
 
 peashooter_bullet_initial_dict = {PeaShooterBulletStateKeyEnum.can_attack_all:False,
 PeaShooterBulletStateKeyEnum.speed:0.3,
-PeaShooterBulletStateKeyEnum.damage:10,
+PeaShooterBulletStateKeyEnum.damage:2,
 PeaShooterBulletStateKeyEnum.attack_type:AttackType.NormalAttack,
 PeaShooterBulletStateKeyEnum.image_refresh_time: 500,
 PeaShooterBulletStateKeyEnum.all_image:get_bullet_image(),
@@ -375,7 +375,7 @@ PeaShooterBulletStateKeyEnum.default_image:BulletImageEnum.PeaNormal
 }
 
 peashooter_ice_bullet_initial_dict= {PeaShooterBulletStateKeyEnum.can_attack_all:False,
-PeaShooterBulletStateKeyEnum.speed:0.1,
+PeaShooterBulletStateKeyEnum.speed:0.3,
 PeaShooterBulletStateKeyEnum.damage:2,
 PeaShooterBulletStateKeyEnum.attack_type:AttackType.IceAttack,
 PeaShooterBulletStateKeyEnum.image_refresh_time: 500,

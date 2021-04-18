@@ -89,15 +89,24 @@ class Zombie:
                     self.state = ZombieState.NormalAttack
                     #是否需要更新时间呢？
                 else:
-                    plants_list[0].accept_damage(self.damage, self.attack_type)
+                    single_plant_index = plants_attack_index_list[0]
+                    plants_list[single_plant_index].accept_damage(self.damage, self.attack_type)
                     self.last_attack_time = self.current_time
                     self.state = ZombieState.NormalAttack
             if self.state == ZombieState.NormalAttack:
                 if self.current_time - self.last_attack_time  < self.attack_interval:
                     return 
+                else:
+                    self.last_attack_time = self.current_time
+                    single_plant_index = plants_attack_index_list[0]
+                    plants_list[single_plant_index].accept_damage(self.damage, self.attack_type)
+                    self.last_attack_time = self.current_time
+                    self.state = ZombieState.NormalAttack
+
+
         else:
             if self.state == ZombieState.NormalAttack:
-                self.state == ZombieState.Normal
+                self.state = ZombieState.Normal
         #self.state.current_time = current_time
 
 
@@ -146,7 +155,7 @@ class Zombie:
                 else:
                     self.under_attack_list.append(k)
             if k == AttackType.BoomAttack:
-                if self.zombie_state== ZombieState.Dying:
+                if self.state== ZombieState.Dying:
                     self.under_attack_dict.append(AttackType.BoomAttack)
 
         return 
@@ -179,6 +188,8 @@ class Zombie:
                 speed =  Attack_Effect_Time[AttackType.IceAttack ]['speed']
             if AttackType.BlindAttack in self.under_attack_list:
                 speed = Attack_Effect_Time[AttackType.BlindAttack]['speed']
+            if self.state == ZombieState.NormalAttack:
+                speed = 0.0
 
 
 
@@ -415,8 +426,9 @@ class Peashooter:
         #注意这个时候只是把状态记录下来，因为接下来需要看看
         self.temp_under_attack_dict[zombie_attack_type] = self.current_time
         self.health = self.health - damage
-        if self.health <0 :
+        if self.health <=0.0 :
             self.state =  PlantState.Dead
+        print(f'{self.id} under attack {self.current_time}')
         #self.state.current_time = current_time          
         return 
     def set_under_attack_state(self): 
