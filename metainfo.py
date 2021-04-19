@@ -322,7 +322,7 @@ class PeaShooterStateKeyEnum:
         id = 'id'
 
 pea_shooter_state_dict ={
-       PeaShooterStateKeyEnum.attack_interval:5000,
+       PeaShooterStateKeyEnum.attack_interval:1000,
        PeaShooterStateKeyEnum.health:25,
        PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.Peashooter),
        PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
@@ -332,7 +332,7 @@ pea_shooter_state_dict ={
 }
 
 snow_pea_shooter_state_dict ={
-       PeaShooterStateKeyEnum.attack_interval:5000,
+       PeaShooterStateKeyEnum.attack_interval:1000,
        PeaShooterStateKeyEnum.health:25,
        PeaShooterStateKeyEnum.all_image:get_plant_image(PlantNameEnum.SnowPea),
        PeaShooterStateKeyEnum.attack_type:AttackType.NoAttack,
@@ -346,7 +346,7 @@ Plants_IntialState ={PlantNameEnum.Peashooter:pea_shooter_state_dict,
 PlantNameEnum.SnowPea:snow_pea_shooter_state_dict
 
 }
-#-----------------------------------------------------------------------------------
+#----------------------------------------s-------------------------------------------
 
 #initialize state for bullets
 
@@ -366,7 +366,7 @@ class PeaShooterBulletStateKeyEnum:
 
 peashooter_bullet_initial_dict = {PeaShooterBulletStateKeyEnum.can_attack_all:False,
 PeaShooterBulletStateKeyEnum.speed:0.3,
-PeaShooterBulletStateKeyEnum.damage:2,
+PeaShooterBulletStateKeyEnum.damage:10.0,
 PeaShooterBulletStateKeyEnum.attack_type:AttackType.NormalAttack,
 PeaShooterBulletStateKeyEnum.image_refresh_time: 500,
 PeaShooterBulletStateKeyEnum.all_image:get_bullet_image(),

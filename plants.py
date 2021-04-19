@@ -67,7 +67,7 @@ class Zombie:
         #接下来判断植物是否可以被攻击
         plants_attack_index_list = []
         for i in range(len(plants_list)):
-            if self.rect.colliderect(plants_list[i].rect):
+            if  Tool.center_collide(self.rect, plants_list[i].rect):
                 if plants_list[i].get_state()!= PlantState.Dead: #没死就可以攻击了
                     plants_attack_index_list.append(i)
         #检测是否需要去攻击，那么现在可以攻击了吧，哈哈
@@ -295,7 +295,7 @@ class PeaShooterBullet:
         if self.state == BulletState.Attacking:
             return 
         for i in range(len(zombie_list)):
-            if self.rect.colliderect(zombie_list[i].rect):
+            if Tool.center_collide(self.rect,zombie_list[i].rect):
                 #没死的话就可以攻击
                 if zombie_list[i].get_state() !=  ZombieState.Dying:
                     zombie_attack_list.append(i)

@@ -148,6 +148,18 @@ All_Images=load_all_gfx(resourceDirectory)
 
 Zombie_Images = get_level_2_images(r'D:\Code\PlantsVsZombies\resources\graphics\Zombies')
 
+def center_collide(rectA, rectB, x_interval = 30, y_interval = 30):
+    # point_A_center_x = rectA.centerx 
+    # point_A_center_y = rectA.centery
+    # point_B_center_x = rectB.centerx
+    # point_B_center_y = rectB.centery 
+
+    # if abs(point_A_center_x - point_B_center_x) < x_interval and abs(point_A_center_y - point_B_center_y) < y_interval:
+    #     return True 
+    return rectA.colliderect(rectB)
+    #return False 
+
+
 Max_X = 800
 Max_Y = 600
 
